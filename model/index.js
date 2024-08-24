@@ -1,7 +1,8 @@
 // const { name } = require('ejs')
 const {Sequelize,DataTypes} = require('sequelize')
-const databaseConfig = require('./config/dbConfig')
-// const databaseConfig = require('./config/dbConfig')
+const databaseConfig = require('../config/dbConfig')
+const makeBlogTable = require('./blogModel')
+const makeUserTable = require('./userMoel')
 
 const sequelize = new Sequelize(databaseConfig.db,databaseConfig.username,databaseConfig.password,{
     host : databaseConfig.host,
@@ -28,6 +29,10 @@ sequelize.authenticate()
 const db ={}
 db.Sequelize=Sequelize
 db.sequelize = sequelize
+
+db.blogs = makeBlogTable(sequelize,DataTypes)
+db.users = makeUserTable(sequelize,DataTypes)
+
 
 db.sequelize.sync({force:false}).then(()=>{
     console.log("Synced done")
