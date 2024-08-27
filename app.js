@@ -1,11 +1,14 @@
-// require('dotenv').config()
+require('dotenv').config()
 const express = require('express')
+const { blogs } = require('./model/index')
 const app = express()
 // const app = require('express')()
 
 
 app.set('view engine','ejs')
 require("./model/index")
+//if diff tech react/node //app.use(express.json())
+app.use(express.urlencoded({extended:true}))
 
 app.get('/',(req,res)=>{
     const data = {
@@ -20,6 +23,22 @@ app.get('/',(req,res)=>{
         haha : data, 
         hehe : nepal
     })
+})
+
+app.get('/create',(req,res)=>{
+    res.render('create.ejs')
+})
+
+app.post("/create",async (req,res)=>{
+    console.log(req.body)
+    // const title= req.body.title
+    const {title,subtitle,description}= req.body
+    await blogs.create({
+        title :title,
+        subtitle :subtitle,
+        description : description
+    })
+    res.send("Blog added Successfullllllly")
 })
 
 
