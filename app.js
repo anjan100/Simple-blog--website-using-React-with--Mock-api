@@ -3,7 +3,10 @@ const express = require('express')
 const { blogs } = require('./model/index')
 const app = express()
 // const app = require('express')()
-
+// const multer = require('./middleware/multerConfig').multer
+// const storage =require('./middleware/multerConfig').storage
+const {multer,storage} = require('./middleware/multerConfig')
+const upload = multer({storage : storage})
 
 app.set('view engine','ejs')
 require("./model/index")
@@ -29,7 +32,7 @@ app.get('/create',(req,res)=>{
     res.render('create.ejs')
 })
 
-app.post("/create",async (req,res)=>{
+app.post("/create", upload.single('image'),async (req,res)=>{
     console.log(req.body)
     // const title= req.body.title
     const {title,subtitle,description}= req.body
