@@ -42,6 +42,18 @@ app.get("/blog/:id",async (req,res)=>{
     res.render("singleBlog.ejs",{blog : blog})
 })
 
+app.get("/delete/:id",async (req,res)=>{
+    const id =req.params.id
+   await blogs.destroy({
+        where :{
+            id : id
+        }
+    })
+    // res.send("Blog Deleted")
+    res.redirect("/")
+})
+
+
 app.get('/create',(req,res)=>{
     res.render('create.ejs')
 })

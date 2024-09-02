@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page</title>
-    <link rel="stylesheet" href="/home.css">
+    <title>Blog Details</title>
+    <link rel="stylesheet" href="/singleBlog.css">
 </head>
+
 <body>
     <!-- Navbar -->
     <nav class="navbar">
@@ -18,22 +20,16 @@
         </ul>
     </nav>
 
-    <!-- Card Section -->
-    <div class="card-container">
-
-
-            <div class="card">
-                <img src="http://localhost:3000/<%- blog.image %>" alt="Card Image">
-                <div class="card-title"><%- blog.title %></div>
-                <p><%- blog.subtitle %></p>
-                <p><%- blog.description %></p>
-                
-            </div>
-       
-        
-
+    <!-- Blog Details Section -->
+    <div class="blog-details">
+        <img src="http://localhost:3000/<%- blog.image %>" alt="Blog Image" class="blog-image">
+        <div class="blog-content">
+            <h1 class="blog-title"><%- blog.title %></h1>
+            <h2 class="blog-subtitle"><%- blog.subtitle %></h2>
+            <p class="blog-description"><%- blog.description %></p>
+            <a href="/delete/<%- blog.id %>" class="delete-button">Delete Me</a>
+        </div>
     </div>
 </body>
-</html>
 
- 
+</html>
