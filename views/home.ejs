@@ -3,15 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Home Page</title>
     <link rel="stylesheet" href="home.css">
 </head>
 <body>
-    <h1>Hello Home PAge</h1>
-    <h1><%- 1+1 %></h1>
-    <h1> <%- haha.name %></h1>
-    <h1> <%- haha.age %></h1>
-    <h1> <%- hehe.continent %></h1>
-    <h2>huhu</h2>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">My Website</div>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Card Section -->
+    <div class="card-container">
+       <% blogs.forEach(function(blog) { %>
+
+            <div class="card">
+                <img src="<%-blog.image%>" alt="Card Image">
+                <div class="card-title"><%-blog.title%></div>
+            </div>
+       <% }) %>
+        
+
+    </div>
 </body>
 </html>
+
+ 
