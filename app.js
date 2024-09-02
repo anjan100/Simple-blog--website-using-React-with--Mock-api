@@ -34,6 +34,14 @@ app.get("/",async (req,res)=>{
     
 // })
 
+app.get("/blog/:id",async (req,res)=>{
+    const id = req.params.id
+    // console.log(id)
+    const blog = await blogs.findByPk(id) //return object
+
+    res.render("singleBlog.ejs",{blog : blog})
+})
+
 app.get('/create',(req,res)=>{
     res.render('create.ejs')
 })
