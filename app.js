@@ -1,12 +1,13 @@
 require('dotenv').config()
 const express = require('express')
-const { blogs,sequelize } = require('./model/index')
+const { blogs,sequelize, users } = require('./model/index')
 const app = express()
 // const app = require('express')()
 // const multer = require('./middleware/multerConfig').multer
 // const storage =require('./middleware/multerConfig').storage
 const {multer,storage} = require('./middleware/multerConfig')
 const upload = multer({storage : storage})
+const bcrypt =require('bcrypt')
 
 app.set('view engine','ejs')
 require("./model/index")
@@ -76,6 +77,21 @@ app.post("/create", upload.single('image'),async (req,res)=>{
 app.get('/about',(req,res)=>{
     res.render('./test/about')
 })
+
+app.get("/register",(req,res)=>{
+    res.render("register")
+})
+
+app.post("/register",async (req,res)=>{
+    const {username,email,password} = req.body
+    await users.create({
+        username , 
+        email, 
+        password : bcrypt.hashSync(password,8)
+    })
+    res.redirect("/login")
+})
+
 app.use(express.static('public/css/'))
 app.use(express.static('./storage/'))
 app.listen(3000,()=>{
